@@ -1,0 +1,161 @@
+<style>
+  #catalyst-status-loader {
+    width: 100%;
+    height: 100%;
+    background-color: #<?= PAGE_COLOR ?>;
+    position: fixed;
+    z-index: 10;
+    transition: .5s all;
+  }
+</style>
+<div id="catalyst-status-loader"></div>
+<div class="center align-center">
+  <h1>Catalyst Status Page</h1>
+  <p>This is where you will find information about the status and metrics of our services.</p>
+  <hr>
+<h2><b>catalyst-web</b></h2>
+<h3><b>Utilization</b></h3>
+<div data-netdata="system.cpu"
+    data-chart-library="gauge"
+    data-title="CPU"
+    data-width="20%"
+    data-height="200"
+    data-after="-600"
+></div><div data-netdata="system.ram"
+    data-dimensions="used|buffers|active|wired"
+    data-gauge-max-value="100"
+      data-append-options="percentage"
+      data-chart-library="gauge"
+      data-title="RAM"
+    data-units="%"
+    data-width="20%"
+    data-height="200"
+    data-gauge-adjust="width"
+    data-before="0"
+    data-after="-540"
+    data-points="540"
+    role="application"
+></div><br>
+<h3><b>CPU</b></h3>
+<div data-netdata="system.cpu"
+    data-chart-library="dygraph"
+    data-title="Total CPU utilization (catalyst-web-cpu)"
+    data-width="50%"
+    data-height="200"
+    data-after="-600"
+></div><br>
+<h3><b>iowait</b></h3>
+Remember to keep an eye on <div data-netdata="system.cpu"
+    data-after="-120"
+    data-chart-library="dygraph"
+    data-dimensions="iowait"
+    data-dygraph-theme="sparkline"
+    data-show-value-of-iowait-at="system.cpu.iowait.1"
+    data-width="5%"
+    data-height="20"
+    ></div> iowait (<span id="system.cpu.iowait.1" style="display: inline-block; min-width: 10px; text-align: right;"></span>%), as well as <div data-netdata="system.cpu"
+    data-after="-120"
+    data-chart-library="dygraph"
+    data-dimensions="softirq"
+    data-dygraph-theme="sparkline"
+    data-show-value-of-softirq-at="system.cpu.softirq.1"
+    data-width="5%"
+    data-height="20"
+    ></div> softirq (<span id="system.cpu.softirq.1" style="display: inline-block; min-width: 10px; text-align: right;"></span>%).
+<h3><b>RAM</b></h3>
+<div data-netdata="system.ram"
+    data-chart-library="dygraph"
+    data-title="Total RAM utilization (catalyst-web-ram)"
+    data-width="50%"
+    data-height="200"
+    data-after="-600"
+></div><br>
+<h3><b>Networking</b></h3>
+<div data-netdata="net_packets.ens18"
+    data-dimensions="received"
+    data-chart-library="gauge"
+    data-title="Received (net_packets.ens18)"
+    data-width="200"
+    data-height="200"
+    data-after="-540"
+></div><br>
+<div class="netdata-container-with-legend"
+    id="chart_net_ens18"
+    data-netdata="net.ens18"
+    data-width="50%"
+    data-height="180px"
+    data-dygraph-valuerange="[null, null]"
+    data-before="0"
+    data-after="-540"
+    data-id="catalyst-web_net_ens18"
+    data-colors=""
+    data-decimal-digits="-1"
+    role="application"
+></div>
+<h3><b>Catalyst Web</b></h3>
+<div data-netdata="apache_local.requests"
+    data-dimensions=""
+    data-chart-library="gauge"
+    data-gauge-adjust="width"
+    data-title="Requests"
+    data-width="12%"
+    data-before="0"
+    data-after="-540"
+    data-points="540"
+    data-colors="#66AA00"
+    role="application"
+  ></div>
+  <div data-netdata="apache_local.connections"
+    data-dimensions=""
+    data-chart-library="gauge"
+    data-gauge-adjust="width"
+    data-title="Connections"
+    data-width="12%"
+    data-before="0"
+    data-after="-540"
+    data-points="540"
+    data-colors="#0099C6"
+    role="application"
+  ></div>
+  <div data-netdata="apache_local.net"
+    data-dimensions=""
+    data-chart-library="gauge"
+    data-gauge-adjust="width"
+    data-title="Bandwidth"
+    data-width="12%"
+    data-before="0"
+    data-after="-540"
+    data-points="540"
+    data-colors="#D66300"
+    role="application"
+  ></div>
+  <div data-netdata="apache_local.workers"
+    data-dimensions="busy"
+    data-chart-library="gauge"
+    data-gauge-adjust="width"
+    data-title="Workers Utilization"
+    data-width="12%"
+    data-before="0"
+    data-after="-540"
+    data-points="540"
+    role="application"
+  ></div><br>
+  <div data-netdata="apache_local.requests"
+    data-width="50%" data-height="180px"
+    data-dygraph-valuerange="[null, null]"
+    data-before="0" data-after="-540"
+    data-id="catalyst-web_apache_local_requests"
+    data-colors="#66AA00"
+    data-decimal-digits="-1"
+    role="application"
+></div>
+</div>
+<script>
+  var netdataTheme = "slate";
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var statusId = document.getElementById('catalyst-status-loader').style
+    statusId.opacity = "0";
+    setTimeout(function(){statusId.display = "none";}, 1000);
+  });
+</script>
+<script type="text/javascript" src="https://catalystapp.co/api/netdata/dashboard.js"></script>

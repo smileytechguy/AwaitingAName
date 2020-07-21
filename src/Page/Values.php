@@ -7,6 +7,8 @@ class Values {
 	const HOME = ["home", "Home"];
 
 	const ABOUT_US = ["about", "About Us"];
+
+	const STATUS = ["status", "Status"];
 	
 	const API_DOCS = ["about", "API Docs"];
 	
